@@ -1,0 +1,32 @@
+{
+  "name": "pccomponentes/dbal-transaction",
+  "description": "DBAL Transaction",
+  "authors": [
+    {
+      "name": "Sergio Hernández Martínez",
+      "email": "sergio.hernandez@pccomponentes.com"
+    }
+  ],
+  "license": "MIT",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "PcComponentes\\Transaction\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PcComponentes\\Transaction\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^7.4",
+    "pccomponentes/transaction": "^1.0",
+    "doctrine/dbal": "^2.10"
+  },
+  "require-dev": {
+    "pccomponentes/coding-standard": "^1.0",
+    "phpunit/phpunit": "^8.5",
+    "dg/bypass-finals": "^1.1"
+  }
+}
