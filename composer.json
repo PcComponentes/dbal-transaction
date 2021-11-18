@@ -20,7 +20,7 @@
     }
   },
   "require": {
-    "php": "^7.4",
+    "php": "^7.4 | ^8.0",
     "pccomponentes/transaction": "^1.0",
     "doctrine/dbal": "^2.10"
   },
