@@ -88,6 +88,6 @@ final class DBALTransactionalConnectionTest extends TestCase
         ;
 
         $transactionalConnection = new DBALTransactionalConnection($DBALConnection);
-        $this->assertTrue($transactionalConnection->isTransactionActive());
+        $this->assertFalse($transactionalConnection->isTransactionActive());
     }
 }
