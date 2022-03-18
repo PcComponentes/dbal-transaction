@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace PcComponentes\Transaction\Tests\Driver\DBAL;
 
-use Doctrine\DBAL\Driver\Connection;
+use Doctrine\DBAL\Connection;
 use PcComponentes\Transaction\Driver\DBAL\DBALTransactionalConnection;
 use PHPUnit\Framework\TestCase;
 
@@ -55,5 +55,39 @@ final class DBALTransactionalConnectionTest extends TestCase
 
         $transactionalConnection = new DBALTransactionalConnection($DBALConnection);
         $transactionalConnection->rollBack();
+    }
+
+    /**
+     * @test
+     */
+    public function given_dbal_connection_when_is_in_transaction_active_then_return_true()
+    {
+        $DBALConnection = $this->createMock(Connection::class);
+
+        $DBALConnection
+            ->expects($this->once())
+            ->method('isTransactionActive')
+            ->willReturn(true)
+        ;
+
+        $transactionalConnection = new DBALTransactionalConnection($DBALConnection);
+        $this->assertTrue($transactionalConnection->isTransactionActive());
+    }
+
+    /**
+     * @test
+     */
+    public function given_dbal_connection_when_is_not_in_transaction_active_then_return_false()
+    {
+        $DBALConnection = $this->createMock(Connection::class);
+
+        $DBALConnection
+            ->expects($this->once())
+            ->method('isTransactionActive')
+            ->willReturn(false)
+        ;
+
+        $transactionalConnection = new DBALTransactionalConnection($DBALConnection);
+        $this->assertTrue($transactionalConnection->isTransactionActive());
     }
 }
