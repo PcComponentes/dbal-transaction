@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace PcComponentes\Transaction\Driver\DBAL;
 
-use Doctrine\DBAL\Driver\Connection;
+use Doctrine\DBAL\Connection;
 use PcComponentes\Transaction\Driver\TransactionalConnection;
 
 final class DBALTransactionalConnection implements TransactionalConnection
@@ -28,5 +28,10 @@ final class DBALTransactionalConnection implements TransactionalConnection
     public function rollBack(): void
     {
         $this->DBALConnection->rollBack();
+    }
+
+    public function isTransactionActive(): bool
+    {
+        return $this->DBALConnection->isTransactionActive();
     }
 }

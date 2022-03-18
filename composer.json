@@ -21,12 +21,12 @@
   },
   "require": {
     "php": "^7.4 | ^8.0",
-    "pccomponentes/transaction": "^1.0",
+    "pccomponentes/transaction": "^2.0",
     "doctrine/dbal": "^2.10 | ^3.0"
   },
   "require-dev": {
     "pccomponentes/coding-standard": "^1.0",
-    "phpunit/phpunit": "^8.5",
+    "phpunit/phpunit": "^9",
     "dg/bypass-finals": "^1.1"
   }
 }
