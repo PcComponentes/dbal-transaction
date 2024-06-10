@@ -10,9 +10,13 @@ final class DBALTransactionalConnection implements TransactionalConnection
 {
     private Connection $DBALConnection;
 
-    public function __construct(Connection $DBALConnection)
+    public function __construct(Connection $DBALConnection, bool $nestTransactionsWithSavepoints = false)
     {
         $this->DBALConnection = $DBALConnection;
+
+        if (true === $nestTransactionsWithSavepoints) {
+            $this->DBALConnection->setNestTransactionsWithSavepoints(true);
+        }
     }
 
     public function beginTransaction(): void
