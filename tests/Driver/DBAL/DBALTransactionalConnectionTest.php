@@ -90,4 +90,25 @@ final class DBALTransactionalConnectionTest extends TestCase
         $transactionalConnection = new DBALTransactionalConnection($DBALConnection);
         $this->assertFalse($transactionalConnection->isTransactionActive());
     }
+
+    /**
+     * @test
+     */
+    public function given_dbal_connection_with_nest_transactions_enabled_when_construct_then_works_correctly()
+    {
+        $DBALConnection = $this->createMock(Connection::class);
+
+        // In DBAL 4+, setNestTransactionsWithSavepoints is deprecated
+        // The code should handle this gracefully by checking if method exists
+        if (\method_exists($DBALConnection, 'setNestTransactionsWithSavepoints')) {
+            $DBALConnection
+                ->expects($this->once())
+                ->method('setNestTransactionsWithSavepoints')
+                ->with(true)
+            ;
+        }
+
+        $transactionalConnection = new DBALTransactionalConnection($DBALConnection, true);
+        $this->assertInstanceOf(DBALTransactionalConnection::class, $transactionalConnection);
+    }
 }
