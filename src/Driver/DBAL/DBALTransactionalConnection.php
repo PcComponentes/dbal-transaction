@@ -15,7 +15,12 @@ final class DBALTransactionalConnection implements TransactionalConnection
         $this->DBALConnection = $DBALConnection;
 
         if (true === $nestTransactionsWithSavepoints) {
-            $this->DBALConnection->setNestTransactionsWithSavepoints(true);
+            // In DBAL 4+, savepoints are always enabled for nested transactions
+            // The setNestTransactionsWithSavepoints method is deprecated and will be removed in DBAL 5
+            // We only call it if it exists to maintain backward compatibility with DBAL 2.x and 3.x
+            if (\method_exists($this->DBALConnection, 'setNestTransactionsWithSavepoints')) {
+                @$this->DBALConnection->setNestTransactionsWithSavepoints(true);
+            }
         }
     }
 
